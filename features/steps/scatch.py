@@ -3,6 +3,11 @@ from selenium.webdriver.common.keys import Keys
 from behave import given, when, then
 from time import sleep
 
+
+pass
+
+
+""""
 @given('Open Amazon Help page')
 def open_amazon_help(context):
     context.driver.get("https://www.amazon.com/gp/help/customer/display.html")
@@ -43,3 +48,4 @@ def find_empty_place_cart(context):
 def text_contain(context, expect_result):
     actual_result = context.cart_place.text
     assert actual_result == expect_result, f'Error! Actual "{actual_result}" does not match expected "{expect_result}"'
+"""
