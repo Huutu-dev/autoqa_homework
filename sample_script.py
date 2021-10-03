@@ -24,4 +24,5 @@ driver.find_element(By.NAME, 'btnK').click()
 assert 'dress' in driver.current_url.lower(), f"Expected query not in {driver.current_url.lower()}"
 print('Test Passed')
 
-driver.quit()
+# driver.quit()
+driver.get("https://www.amazon.com/gp/bestsellers/?ref_=nav_cs_bestsellers")
