@@ -9,11 +9,13 @@ PRODUCT_NAME = (By.ID, 'productTitle')
 
 @when('Click on the first product')
 def click_first_product(context):
+    context.driver.refresh()
     context.driver.find_element(*PRODUCT_PRICE).click()
 
 
 @when('Store product name')
 def get_product_name(context):
+    context.driver.refresh()
     context.current_product_name = context.driver.find_element(*PRODUCT_NAME).text
     print(f'Current product: {context.current_product_name}')
 

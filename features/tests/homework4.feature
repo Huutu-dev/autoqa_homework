@@ -4,7 +4,7 @@ Feature: Test case HW4
   Scenario: Test case will open BestSellers Amazon page
     Given Open BestSellers page
     When Store card metric list
-    Then Verify there is 5 links in the list
+    Then Verify there are 5 links in the list
     Then Verify the number the 1 item is "Best Sellers"
     And Verify the number the 2 item is "New Releases"
     And Verify the number the 3 item is "Movers & Shakers"
@@ -19,10 +19,10 @@ Feature: Test case HW4
     When Store product name
     And Click on Add to cart button
     And Open cart page
-    Then Verify cart has 1 item(s)
+    Then Verify cart has <number> item(s)
     And  Verify cart has correct product
     Examples:
-      |search_word  |result    |
-      |table        |"table"   |
-      |coffee       |"coffee"  |
-      |mug          |"mug"     |
+      |search_word  |number|
+      |clock        |    1 |
+      |table        |    1 |
+      |mug          |    1 |
