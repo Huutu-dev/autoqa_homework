@@ -1,4 +1,7 @@
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.support.ui import Select
+
 from .base_page import Page
 
 
@@ -11,12 +14,17 @@ class MainPage(Page):
         self.open_page()
 
 
-class Header(MainPage):
+class Header(Page):
+    DEPARTMENT_SELECT = (By.ID, "searchDropdownBox")
     SEARCH_FIELD = (By.ID, 'twotabsearchtextbox')
     SEARCH_ICON = (By.ID, "nav-search-submit-button")
     AMAZON_ICON = (By.ID, "nav-logo-sprites")
     NAV_ORDER = (By.CSS_SELECTOR, 'a#nav-orders')
     NAV_CART = (By.CSS_SELECTOR, "div#nav-tools a#nav-cart.nav-a")
+
+    @classmethod
+    def get_sub_url(cls):
+        return NotImplemented
 
     def __init__(self, driver):
         super().__init__(driver)
@@ -43,3 +51,7 @@ class Header(MainPage):
         else:
             assert isinstance(page_obj, Page)
             page_obj.click_wait_page_opened(self.NAV_CART)
+
+    def select_department_by_alias(self, alias):
+        select = Select(self.find_element(*self.DEPARTMENT_SELECT))
+        select.select_by_value(f"search-alias={alias}")

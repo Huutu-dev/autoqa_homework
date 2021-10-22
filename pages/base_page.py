@@ -1,5 +1,5 @@
 from abc import ABCMeta, abstractmethod
-from selenium.webdriver.remote.webdriver import WebDriver
+from selenium.webdriver.remote.webdriver import WebDriver, WebElement
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
@@ -45,21 +45,21 @@ class Page(metaclass=ABCMeta):
     def click_wait_page_opened(self, locator, sec_try=4, nb_try=3):
         self._wait_click_to_open(locator, self.get_sub_url(), sec_try, nb_try)
 
-    def wait_page_opened(self, message=''):
-        self.wait_for_opening(self.get_sub_url(), message=message)
+    def wait_page_opened(self, message='') -> WebElement:
+        return self.wait_for_opening(self.get_sub_url(), message=message)
 
     def wait_for_element_click(self, locator, message=''):
         e = self.driver.wait.until(EC.element_to_be_clickable(locator), message=message)
         e.click()
 
-    def wait_for_element_disappear(self, locator):
-        self.driver.wait.until(EC.invisibility_of_element(locator))
+    def wait_for_element_disappear(self, locator) -> WebElement:
+        return self.driver.wait.until(EC.invisibility_of_element(locator))
 
-    def wait_for_element_appear(self, locator):
-        self.driver.wait.until(EC.presence_of_element_located(locator))
+    def wait_for_element_appear(self, locator) -> WebElement:
+        return self.driver.wait.until(EC.presence_of_element_located(locator))
 
-    def wait_for_opening(self, partial_url, message=''):
-        self.driver.wait.until(EC.url_contains(partial_url), message=message)
+    def wait_for_opening(self, partial_url, message='') -> WebElement:
+        return self.driver.wait.until(EC.url_contains(partial_url), message=message)
 
     def input_text(self, text, *locator):
         self.driver.find_element(*locator).send_keys(text)

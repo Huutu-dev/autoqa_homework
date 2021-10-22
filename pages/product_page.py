@@ -14,6 +14,8 @@ class ProductPage(Page):
     CURRENT_COLOR = (By.CSS_SELECTOR, '#variation_color_name .selection')
     ACCORDION_ROW = (By.CSS_SELECTOR, "#newAccordionRow i.a-icon-radio-inactive")
     NO_COVERAGE = (By.CSS_SELECTOR, "#attachSiNoCoverage input.a-button-input")
+    DEPARTMENT_LOCATOR = (By.CSS_SELECTOR, '#nav-subnav[data-category={CATEGORY}]')
+
 
     @classmethod
     def get_sub_url(cls):
@@ -22,6 +24,10 @@ class ProductPage(Page):
     def __init__(self, driver):
         super().__init__(driver)
         self._current_product_name = ''
+
+    def open_product(self, product_id):
+        self.open_page(f'/dp/{product_id}/')
+        return self.driver
 
     @property
     def current_product_name(self):
@@ -67,3 +73,9 @@ class ProductPage(Page):
         for i, color_e in enumerate(color_elements):
             color_e.click()
             self.verify_text(expected_colors[i], *self.CURRENT_COLOR)
+
+    def _get_expected_category_locator(self, expected_category):
+        return self.DEPARTMENT_LOCATOR[0], self.DEPARTMENT_LOCATOR[1].format(CATEGORY=expected_category)
+
+    def verify_correct_department_selected(self, expected_department: str):
+        self.find_element(*self._get_expected_category_locator(expected_department))
