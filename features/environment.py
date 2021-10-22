@@ -8,7 +8,7 @@ def browser_init(context):
     """
     :param context: Behave context
     """
-    context.driver = webdriver.Chrome(service=ChromeService(r"D:\Careerist\AutomaticQA\bin\chromedriver.exe"))
+    context.driver = webdriver.Chrome(service=ChromeService(r"D:\Careerist\AutomaticQA\bin\Chrome95\chromedriver.exe"))
     # context.browser = webdriver.Safari()
     # context.browser = webdriver.Firefox()
 
